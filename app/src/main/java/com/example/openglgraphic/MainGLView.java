@@ -13,7 +13,7 @@ public class MainGLView extends GLSurfaceView {
         super(context, attrs);
 
         setEGLContextClientVersion(2);
-        mRenderer = new MainRenderer();
+        mRenderer = new MainRenderer(context);
         setRenderer(mRenderer);
     }
 }
