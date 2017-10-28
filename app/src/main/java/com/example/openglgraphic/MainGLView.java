@@ -13,6 +13,10 @@ public class MainGLView extends GLSurfaceView {
         super(context, attrs);
 
         setEGLContextClientVersion(2);
+
+        //Use Emulator Setting
+        setEGLConfigChooser(8 , 8, 8, 8, 16, 0);
+
         mRenderer = new MainRenderer(context);
         setRenderer(mRenderer);
     }

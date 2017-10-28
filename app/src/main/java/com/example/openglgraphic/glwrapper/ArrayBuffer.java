@@ -16,7 +16,22 @@ public class ArrayBuffer {
             -0.5f,  0.5f, 0.0f,   // top left
             -0.5f, -0.5f, 0.0f,   // bottom left
             0.5f, -0.5f, 0.0f,   // bottom right
-            0.5f,  0.5f, 0.0f }; // top right
+            0.5f,  0.5f, 0.0f,
+            -0.5f,  0.5f, 0.0f,
+            0.5f, -0.5f, 0.0f,
+    };
+
+    private float tripletriangleCoords[] = {
+            -0.5f,  0.5f, 0.0f,   // top left
+            -0.5f, -0.5f, 0.0f,   // bottom left
+            0.5f, -0.5f, 0.0f,   // bottom right
+            0.5f,  0.5f, 0.0f,
+            -0.5f,  0.5f, 0.0f,
+            0.5f, -0.5f, 0.0f,
+            0.5f,  0.5f, 0.0f,
+            -1.0f, -0.5f, 0.0f,
+            -0.5f, -0.5f, 0.0f,
+    };
 
     private float triangleCoords[] = {   // in counterclockwise order:
             0.0f,  0.622008459f, 0.0f, // top
@@ -40,7 +55,7 @@ public class ArrayBuffer {
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, vertex[0]);
 
 
-        mVertices.put(triangleCoords);
+        mVertices.put(tripletriangleCoords);
         int size = mVertices.position();
         mVertices.rewind();
 
