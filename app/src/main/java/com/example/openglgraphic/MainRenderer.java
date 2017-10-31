@@ -6,6 +6,7 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 
 import com.example.openglgraphic.glwrapper.ArrayBuffer;
+import com.example.openglgraphic.glwrapper.IndexBuffer;
 import com.example.openglgraphic.glwrapper.Program;
 
 import java.io.InputStream;
@@ -18,6 +19,7 @@ public class MainRenderer implements GLSurfaceView.Renderer {
 
     private Program mProgram;
     private ArrayBuffer mArrayBuffer;
+    private IndexBuffer mIndexBuffer;
 
     private int mPositionHandle;
 
@@ -32,6 +34,7 @@ public class MainRenderer implements GLSurfaceView.Renderer {
 
         mProgram = new Program(vertex_stream, fragment_stream);
         mArrayBuffer = new ArrayBuffer(100);
+        mIndexBuffer = new IndexBuffer(100);
     }
 
     @Override
@@ -42,6 +45,7 @@ public class MainRenderer implements GLSurfaceView.Renderer {
         mProgram.build();
         mProgram.enable();
         mArrayBuffer.bind();
+        mIndexBuffer.bind();
 
         mPositionHandle = mProgram.getAttributeLocation("a_Position");
 
@@ -57,6 +61,6 @@ public class MainRenderer implements GLSurfaceView.Renderer {
     @Override
     public void onDrawFrame(GL10 gl10) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
-        GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 9);
+        GLES20.glDrawElements(GLES20.GL_TRIANGLES, mIndexBuffer.count(), GLES20.GL_UNSIGNED_SHORT, 0);
     }
 }
