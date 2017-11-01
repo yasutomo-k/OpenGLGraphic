@@ -21,18 +21,6 @@ public class ArrayBuffer {
             0.5f, -0.5f, 0.0f,
     };
 
-    private float tripletriangleCoords[] = {
-            -0.5f,  0.5f, 0.0f,   // top left
-            -0.5f, -0.5f, 0.0f,   // bottom left
-            0.5f, -0.5f, 0.0f,   // bottom right
-            0.5f,  0.5f, 0.0f,
-    };
-
-    private float triangleCoords[] = {   // in counterclockwise order:
-            0.0f,  0.622008459f, 0.0f, // top
-            -0.5f, -0.311004243f, 0.0f, // bottom left
-            0.5f, -0.311004243f, 0.0f  // bottom right
-    };
 
     public ArrayBuffer(int max){
         // max size of float
@@ -48,12 +36,16 @@ public class ArrayBuffer {
         int[] vertex = new int[1];
         GLES20.glGenBuffers(1, vertex, 0);
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, vertex[0]);
+    }
 
+    public void put(float[] coords){
+        mVertices.put(coords);
+    }
 
-        mVertices.put(squareCoords);
+    public void writeBuffer(){
         int size = mVertices.position();
         mVertices.rewind();
 
-        GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, FLOAT_SIZE * size,mVertices,GLES20.GL_STATIC_DRAW );
+        GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, FLOAT_SIZE * size,mVertices,GLES20.GL_DYNAMIC_DRAW );
     }
 }

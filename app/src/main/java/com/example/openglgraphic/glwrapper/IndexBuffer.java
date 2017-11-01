@@ -13,8 +13,7 @@ public class IndexBuffer {
     private int mMax;
     private ShortBuffer mIndices;
 
-    private short drawTrinangleOrder[] = { 0, 1, 2};
-    private short drawOrder[] = { 0, 1, 2, 0, 2, 3 };
+
 
     private int mIndexCount;
 
@@ -33,16 +32,17 @@ public class IndexBuffer {
         int[] buffer = new int[1];
         GLES20.glGenBuffers(1, buffer, 0);
         GLES20.glBindBuffer(GLES20.GL_ELEMENT_ARRAY_BUFFER, buffer[0]);
+    }
 
+    public void put(short[] order){
+        mIndices.put(order);
+    }
 
-        mIndices.put(drawOrder);
+    public int writeBuffer(){
         mIndexCount = mIndices.position();
         mIndices.rewind();
 
-        GLES20.glBufferData(GLES20.GL_ELEMENT_ARRAY_BUFFER,mIndexCount * SHORT_SIZE,mIndices,GLES20.GL_STATIC_DRAW);
-    }
-
-    public int count(){
+        GLES20.glBufferData(GLES20.GL_ELEMENT_ARRAY_BUFFER,mIndexCount * SHORT_SIZE,mIndices,GLES20.GL_DYNAMIC_DRAW);
         return mIndexCount;
     }
 }
